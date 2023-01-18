@@ -1,0 +1,37 @@
+1_ npm init -y
+
+2_ tsc --init
+
+3_ en target de tsconfig.json cambiarlo por "es6"
+
+4_descomentar "outDir" y colocar la ruta "./dist"
+
+5_asegurar que "stric" este en true y "esModuleInterop" en true
+
+6_ descomentar "sourceMap" y que este en true
+
+7_ descomentar "moduleResolution" : "node", comprobar que el valor sea "node"
+
+8 _ ejecutar "tsc" en la terminal y comprobar que se cree una carpeta "dist" y que compile el app.ts en app.js
+
+9_ instalar las dependencias "tslint" y typescript de forma local
+npm i tslint --save-dev
+npm i typescript --save-dev
+
+10_ configurar tslint
+	a) en la terminal colocar "./node_modules/.bin/tslint --init"
+	b) en el archivos tslint.json, em rules colocar "no-console" : false
+		ej : "rules": {
+        		"no-console" : false
+    			},
+
+
+configurar servidor
+
+11 _ instalar las dependencias necesarias y 
+npm i --save-dev @types/express "esta sirve para que el modulo de express este tipado con typescript"
+
+12 _ correr el servidor
+	a) en el archivo package.json agregar el script "dev" : "nodemon dist/app.js" y "tsc-auto" : 		"tsc --watch"
+
+	b) tener dos terminales abiertas y ejecutar en una "npm run tsc-auto" y en otra "npm run dev"
