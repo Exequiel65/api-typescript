@@ -2,6 +2,7 @@ import express, {Application} from 'express';
 import userRouter from '../routes/usuario';
 import cors from 'cors'
 import db from '../db/connection';
+import dbMongo from '../db/connextionMongo';
 
 
 class Server{
@@ -14,8 +15,8 @@ class Server{
         this.app = express();
         this.port = process.env.PORT || '8000';
 
-
         // Métodos iniciales
+        this.dbConnectionMongo();
         this.dbConnection();
         this.middlewares();
         //definir mis rutas
@@ -27,6 +28,15 @@ class Server{
         try {
             await db.authenticate();
             console.log('Database Online')
+        } catch (error) {
+            console.log(error)
+            throw new Error();
+        }
+    }
+
+    async dbConnectionMongo(){
+        try {
+            await dbMongo();
         } catch (error) {
             console.log(error)
             throw new Error();

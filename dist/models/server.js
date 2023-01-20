@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const usuario_1 = __importDefault(require("../routes/usuario"));
 const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("../db/connection"));
+const connextionMongo_1 = __importDefault(require("../db/connextionMongo"));
 class Server {
     constructor() {
         this.apiPaths = {
@@ -24,6 +25,7 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8000';
         // Métodos iniciales
+        this.dbConnectionMongo();
         this.dbConnection();
         this.middlewares();
         //definir mis rutas
@@ -34,6 +36,17 @@ class Server {
             try {
                 yield connection_1.default.authenticate();
                 console.log('Database Online');
+            }
+            catch (error) {
+                console.log(error);
+                throw new Error();
+            }
+        });
+    }
+    dbConnectionMongo() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield (0, connextionMongo_1.default)();
             }
             catch (error) {
                 console.log(error);
